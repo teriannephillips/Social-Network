@@ -23,6 +23,21 @@ module.exports = {
       .then((dbUserData) => res.json(dbUserData))
       .catch((err) => res.status(500).json(err));
   },
+  deleteUser(req,res) {
+    User.deleteOne({ _id: req.params.userId })
+    .then(() => res.json({ message: 'User deleted' }))
+    .catch((err) => res.status(500).json(err));
+  
+  },
+  updateUser(req,res) {
+    User.findOneAndUpdate(
+      { _id: req.params.userId },
+      {username: req.body.username, email: req.body.email},
+      )
+    .then(() => res.json({ message: 'User updated' }))
+    .catch((err) => res.status(500).json(err));
+  
+  },
   //add a friend
   addFriend(req, res) {
     return User.findOneAndUpdate(

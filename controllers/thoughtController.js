@@ -7,13 +7,28 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   getSingleThought(req, res) {
-    Post.findOne({ _id: req.params.thoughtId })
+    Thought.findOne({ _id: req.params.thoughtId })
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: 'No thought with that ID' })
           : res.json(thought)
       )
       .catch((err) => res.status(500).json(err));
+  },
+  deleteThought(req,res) {
+    Thought.deleteOne({ _id: req.params.thoughtId})
+    .then(() => res.json({ message: 'Thought deleted' }))
+    .catch((err) => res.status(500).json(err));
+  
+  },
+  updateThought(req,res) {
+  Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      {thoughtText: req.body.thoughtText},
+      )
+    .then(() => res.json({ message: 'Thought updated' }))
+    .catch((err) => res.status(500).json(err));
+  
   },
   // create a new thought
   createThought(req, res) {
