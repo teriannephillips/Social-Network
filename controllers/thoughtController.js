@@ -52,4 +52,13 @@ module.exports = {
         res.status(500).json(err);
       });
   },
+  addReaction(req,res) {
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      {reactionBody: req.body.reactionBody, username: req.body.username},
+      )
+    .then(() => res.json({ message: 'Reaction added' }))
+    .catch((err) => res.status(500).json(err));
+  
+  },
 };
