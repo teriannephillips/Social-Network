@@ -20,6 +20,12 @@ module.exports = {
   //delete single thought by id
   deleteThought(req, res) {
     Thought.deleteOne({ _id: req.params.thoughtId })
+      .then(() => {
+        return User.findOneAndUpdate(
+          { thoughtId: req.params.thoughtId },
+          { $pull: { thoughts: req.params.thoughtId } },
+        )
+      })
       .then(() => res.json({ message: 'Thought deleted' }))
       .catch((err) => res.status(500).json(err));
 

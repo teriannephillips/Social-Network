@@ -27,6 +27,7 @@ clone the project, run npm install to install the required packages, run node se
 ---
 ## Video
 
+https://youtu.be/5_xtRagjqJQ
 
 [BACK TO TOP](#top)
 
