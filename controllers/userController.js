@@ -31,6 +31,7 @@ module.exports = {
       .then(() => res.json({ message: 'User deleted' }))
       .catch((err) => res.status(500).json(err));
   },
+  
   //update a user by id
   updateUser(req, res) {
     User.findOneAndUpdate(
